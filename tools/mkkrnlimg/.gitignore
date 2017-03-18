@@ -1,0 +1,4 @@
+*.dSYM
+mkkrnlimg
+rkimage_unpack
+rkimage_pack
