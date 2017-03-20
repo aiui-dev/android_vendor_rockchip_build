@@ -1,0 +1,9 @@
+INSTALLED_KERNELIMAGE_TARGET := $(PRODUCT_OUT)/kernel.img
+
+.PHONY: kernelimage
+kernelimage: $(INSTALLED_KERNELIMAGE_TARGET)
+
+INSTALLED_RESOURCEIMAGE_TARGET := $(PRODUCT_OUT)/resource.img
+
+.PHONY: resourceimage
+resourceimage: $(INSTALLED_RESOURCEIMAGE_TARGET)
