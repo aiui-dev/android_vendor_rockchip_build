@@ -1,6 +1,6 @@
 ifneq ($(filter rk%,$(strip $(TARGET_BOARD_PLATFORM))),)
 
-INSTALLED_DTBS := $(wildcard $(KERNEL_OUT)/arch/$(KERNEL_ARCH)/boot/dts/*.dtb)
+INSTALLED_DTBS := $(wildcard $(KERNEL_OUT)/arch/$(TARGET_KERNEL_ARCH)/boot/dts/*.dtb)
 
 $(INSTALLED_RESOURCEIMAGE_TARGET): $(RESOURCE_TOOL) \
 		$(INSTALLED_KERNELIMAGE_TARGET) $(INSTALLED_DTBS)
