@@ -6,5 +6,6 @@ $(INSTALLED_RESOURCEIMAGE_TARGET): $(RESOURCE_TOOL) \
 		$(INSTALLED_KERNELIMAGE_TARGET) $(INSTALLED_DTBS)
 	$(call pretty,"Target resource image: $@")
 	$(hide) pushd $(dir $@); $(RESOURCE_TOOL) $(INSTALLED_DTBS); popd
+	@echo -e ${CL_CYN}"Made resource image: $@"${CL_RST}
 
 endif # TARGET_BOARD_PLATFORM
