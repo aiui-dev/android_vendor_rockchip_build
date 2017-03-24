@@ -55,4 +55,9 @@ typedef struct {
 
 #define VERSION             "2014-5-31 14:43:42"
 
+extern int fix_blocks(size_t size);
+extern const char* fix_path(const char* path);
+extern void fix_header(resource_ptn_header* header);
+extern void fix_entry(index_tbl_entry* entry);
+
 #endif //RESOURCE_TOOL_H

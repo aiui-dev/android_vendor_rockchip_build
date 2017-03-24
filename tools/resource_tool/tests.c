@@ -70,7 +70,6 @@ bool write_data(int offset_block, void* data, size_t len) {
         if (!StorageWriteLba(offset_block + blocks, buf, 1))
             goto end;
     }
-done:
     ret = true;
 end:
     return ret;
@@ -82,7 +81,6 @@ bool read_data(int offset_block, void* data, int blocks) {
         goto end;
     if (!StorageReadLba(offset_block, data, blocks))
         goto end;
-done:
     ret = true;
 end:
     return ret;
@@ -194,7 +192,7 @@ static bool get_entry(const char* file_path, index_tbl_entry* entry) {
         goto end;
     }
 
-    int i;
+    uint32_t i;
     for (i = 0; i < header.tbl_entry_num; i++) {
         //TODO: support tbl_entry_size
         if (!StorageReadLba(get_ptn_offset() +
@@ -407,7 +405,7 @@ int test_charge(int argc, char** argv) {
         goto end;
     }
 
-    int i = 0, j = 0, k = 0;
+    int i = 0, j = 0;
     for (i = 0; i < level_conf_num; i++) {
         if (!level_confs[i].delay) {
             level_confs[i].delay = delay;

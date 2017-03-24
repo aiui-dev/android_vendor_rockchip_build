@@ -4,6 +4,7 @@
  * SPDX-License-Identifier:	GPL-2.0+
  */
 #include "resource_tool.h"
+#include "tests.h"
 #include <sys/stat.h>
 #include <time.h>
 #include <errno.h>
@@ -56,7 +57,6 @@ enum ACTION {
 
 int main(int argc, char** argv) {
     PROG = fix_path(argv[0]);
-    bool pack = true;
 
     enum ACTION action = ACTION_PACK;
 
@@ -173,7 +173,7 @@ static bool mkdirs(char* path) {
     char* pos = NULL;
     char buf[MAX_INDEX_ENTRY_PATH_LEN];
     bool ret = true;
-    while(pos = memchr(tmp, '/', strlen(tmp))) {
+    while ((pos = memchr(tmp, '/', strlen(tmp))) != 0) {
         strcpy(buf, path);
         buf[pos - path] = '\0';
         tmp = pos + 1;
@@ -289,7 +289,7 @@ static int unpack_image(const char* dir) {
 
     printf("Dump Index table:\n");
     index_tbl_entry entry;
-    int i;
+    uint32_t i;
     for (i = 0; i < header.tbl_entry_num; i++) {
         //TODO: support tbl_entry_size
         if (!fread(buf, BLOCK_SIZE, 1, image_file)) {
@@ -330,7 +330,7 @@ static inline size_t get_file_size(const char* path) {
         LOGE("Failed to get size:%s", path);
         return -1;
     }
-    LOGD("path:%s, size:%d", path, st.st_size);
+    LOGD("path:%s, size:%zd", path, st.st_size);
     return st.st_size;
 }
 
@@ -345,7 +345,7 @@ static int write_file(int offset_block, const char* src_path) {
         LOGE("Failed to open:%s", src_path);
         goto end;
     }
-    
+
     file_size = get_file_size(src_path);
     if(file_size < 0) {
         goto end;
@@ -363,7 +363,6 @@ static int write_file(int offset_block, const char* src_path) {
             goto end;
         }
     }
-done:
     ret = blocks;
 end:
     if (src_file)

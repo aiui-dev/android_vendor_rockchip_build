@@ -29,3 +29,7 @@ typedef struct {
 
 extern char image_path[MAX_INDEX_ENTRY_PATH_LEN];
 
+extern int test_load(int argc, char** argv);
+extern int test_charge(int argc, char** argv);
+
+extern bool write_data(int offset_block, void* data, size_t len);
