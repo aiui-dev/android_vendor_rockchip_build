@@ -4,6 +4,7 @@ ifneq ($(filter rk%,$(strip $(TARGET_BOARD_PLATFORM))),)
 # Tools that are prebuilts for TARGET_BUILD_APPS
 #
 
+MKPARAMS := $(HOST_OUT_EXECUTABLES)/mkparams
 MKKRNLIMG := $(HOST_OUT_EXECUTABLES)/mkkrnlimg
 RESOURCE_TOOL := $(HOST_OUT_EXECUTABLES)/resource_tool
 

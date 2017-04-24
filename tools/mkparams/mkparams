@@ -1,0 +1,28 @@
+#!/bin/sh
+
+if [[ $# != 4 ]]; then
+    echo "usage: mkparams <parameters.txt> <cmdline> <device> <mtdparts.txt>"
+    exit -1
+fi
+
+cat $1
+
+printf "CMDLINE: %s mtdparts=%s:" "$2" $3
+
+offset=0x00002000  # skip parameters block
+cat $4 | while read name size; do
+    if [[ -z $name ]] || [[ -z $size ]]; then
+        continue
+    fi
+
+    if [[ $name =~ ^# ]]; then
+        continue
+    fi
+
+    if [[ $size != '-' ]]; then
+        printf '0x%08x@0x%08x(%s),' $size $offset $name
+        offset=$(($offset + $size))
+    else
+        printf -- '-@0x%08x(%s)\n' $offset $name
+    fi
+done
